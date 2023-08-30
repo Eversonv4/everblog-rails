@@ -31,6 +31,7 @@ gem "jbuilder"
 gem 'rails-i18n', '~> 7.0.0' # For 7.0.0
 gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 gem "friendly_id"
+gem "pg_search"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
