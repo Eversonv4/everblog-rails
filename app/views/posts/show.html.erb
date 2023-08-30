@@ -60,11 +60,15 @@
         </div>
 
         <div class="col text-end">
-          <em data-bs-toggle="tooltip" data-bs-title="<%= comment.created_at %>" data-bs-placement="top">
+          <em data-bs-toggle="tooltip" data-bs-title="<%= I18n.l(comment.created_at, format: :long) %>" data-bs-placement="top">
             <%= time_ago_in_words(comment.created_at) %> atrás
           </em>
         </div>
       </div>
+
+      <hr />
+
+      <%= sanitize(comment.body.gsub("\n", "<br>")).html_safe %>
     </div>
   <% end %>
 </div>
