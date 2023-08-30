@@ -1,14 +1,28 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<div id="posts">
+<div class="flex-col-gap-1">
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+    <div class="card bg-light">
+      <div class="card-body">
+        <h4><%= link_to post.title, post, class: "text-decoration-none text-primary" %></h4>
+      
+        <div class="text-muted mb-2">
+          <em>Por <%= post.author %> (<%= I18n.l( post.created_at, format: :long ) %>)</em>
+        </div>
+  
+        <p><%= post.body.truncate(200) %></p>
+  
+        <p class="text-secondary"><%= pluralize(post.comments.count, "Comentário") %></p>
+  
+        <%= link_to "Ler Artigo", post, class: "btn btn-primary" %>
+        <%= link_to "Editar", edit_post_path(post), class: "btn btn-secondary" %>
+        <%= link_to "Apagar", post, class: "btn btn-danger", data: { turbo_confirm: "Você tem certeza?", turbo_method: :delete } %>
+  
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New post", new_post_path %>
+<hr />
+
+<div class="text-end">
+  <%= link_to "Criar novo post", new_post_path, class: "btn btn-success" %>
+</div>

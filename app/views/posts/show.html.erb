@@ -1,10 +1,79 @@
-<p style="color: green"><%= notice %></p>
+<!-- <p style="color: green"><%= notice %></p> -->
 
-<%= render @post %>
+<!-- <%= render @post %> -->
 
-<div>
+
+
+<!-- Content Post -->
+<div id="<%= @post.id %>" class="shadow p-5 bg-body-tertiary rounded">
+  <div class="text-center mb-5">
+    <h1><%= @post.title %></h1>
+    
+    <p class="text-secondary ">
+      <strong class="fw-medium">Por <%= @post.author %></strong>
+      <br />
+      <em><%= I18n.l(@post.created_at, format: :long) %></em>
+    </p>
+  </div>
+
+  <div class="px-5 fw-medium">
+    <%= @post.body.gsub("\n", "<br>").html_safe %>
+  </div>
+</div>
+
+
+<!-- Comments -->
+<div class="m-5 flex-col-gap-1">
+  <div class="text-center">
+    <h4>
+      <%= pluralize(@post.comments.count, "Comentário") %>
+
+      <% if @post.comments.none? %>
+        <span class="badge bg-success">Seja o primeiro a comentar!</span>
+      <% end %>
+    </h4>
+  </div>
+
+  <div class="shadow-sm p-5 bg-body-tertiary rounded">
+    <%= form_with model: @comment, local: true do |form| %>
+      <%= form.hidden_field :post_id, value: @post.id %>
+  
+      <div class="mb-3">
+        <%= form.label :author %>
+        <%= form.text_field :author, class: "form-control" %>
+      </div>
+  
+      <div class="mb-3">
+        <%= form.label :body %>
+        <%= form.text_area :body, class: "form-control", rows: 2 %>
+      </div>
+  
+      <%= form.submit "Enviar", class: "btn btn-primary", data: {disable_with: 'Enviando...'} %>
+    <% end %>
+  </div>
+
+  <% @comments.each do |comment| %>
+    <div class="shadow-sm p-5 bg-body-tertiary rounded">
+      <div class="row">
+        <div class="col">
+          <strong><%= comment.author %></strong>
+        </div>
+
+        <div class="col text-end">
+          <em data-bs-toggle="tooltip" data-bs-title="<%= comment.created_at %>" data-bs-placement="top">
+            <%= time_ago_in_words(comment.created_at) %> atrás
+          </em>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+<!-- <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
   <%= link_to "Back to posts", posts_path %>
 
   <%= button_to "Destroy this post", @post, method: :delete %>
-</div>
+</div> -->

@@ -29,4 +29,17 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-pt_BR:
+pt-BR:
+  activerecord:
+    method:
+      post: 'Post'
+      comment: 'Comentário'
+
+    attributes:
+      post:
+        title: 'Título'
+        author: 'Autor'
+        body: 'Post'
+      comment:
+        author: 'Autor'
+        body: "Comentário"
